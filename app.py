@@ -56,3 +56,39 @@ if st.button("Покажи всички книги"):
             st.write("Автор:", book["author"])
             st.write("Цена:", book["price"])
             st.write("--------------------")
+
+# ============================
+# 🔎 Търсене по заглавие
+# ============================
+
+st.header("🔎 Търсене по заглавие")
+search_title = st.text_input("Въведи заглавие на книга")
+
+if st.button("Търси по заглавие"):
+    found = False
+
+    for book in st.session_state.books:
+        if book["title"].lower() == search_title.lower():
+            st.write(book)
+            found = True
+
+    if not found:
+        st.write("Няма намерена книга с това заглавие.")
+
+# ============================
+# 💰 Търсене по цена
+# ============================
+
+st.header("💰 Търсене по цена")
+search_price = st.number_input("Въведи цена за търсене", min_value=0.0, key="price_search")
+
+if st.button("Търси по цена"):
+    found = False
+
+    for book in st.session_state.books:
+        if book["price"] == search_price:
+            st.write(book)
+            found = True
+
+    if not found:
+        st.write("Няма книги с тази цена.")
